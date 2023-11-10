@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
@@ -76,23 +77,311 @@
                     app:layout_constraintEnd_toEndOf="@+id/imageView3"
                     app:layout_goneMarginEnd="8dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/search_box"
                 android:layout_marginLeft="18dp"
-                android:layout_marginRight="18dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="18dp"
+                android:background="@drawable/search_box"
                 android:drawableStart="@drawable/search_logo"
-                android:paddingStart="20dp"
                 android:drawablePadding="10dp"
                 android:hint="Search Your Food"
-                >
+                android:paddingStart="20dp">
 
             </EditText>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginBottom="5dp"
+                android:text="Categories"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                >
+
+            </TextView>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/biriyani">
+
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Rice">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="20dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/kebab">
+
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="kebab">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="20dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/dessert">
+
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Rice">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/addon">
+
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Rice">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="18dp"
+                android:text="Menu"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                >
+
+            </TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/menuRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+
+                >
+
+            </androidx.recyclerview.widget.RecyclerView>
 
 
         </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="0.2"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/home"
+                    >
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Home"
+                    android:layout_marginTop="5dp"
+                    android:textSize="12sp"
+
+                    >
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="0.2"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cart"
+                    >
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cart"
+                    android:layout_marginTop="5dp"
+                    android:textSize="12sp"
+
+                    >
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="0.2"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/notification"
+                    >
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notifications"
+                    android:layout_marginTop="5dp"
+                    android:textSize="12sp"
+
+                    >
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="0.2"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/profile"
+                    >
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profile"
+                    android:layout_marginTop="5dp"
+                    android:textSize="12sp"
+
+                    >
+
+                </TextView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
