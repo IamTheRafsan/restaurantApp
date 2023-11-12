@@ -1,13 +1,13 @@
 package com.example.ladidh
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     val menuList: ArrayList<HashMap <String, String>> = ArrayList()
     private lateinit var adapter: myAdapter
     private lateinit var menuRecycleView: RecyclerView
+    var menuHashMap: HashMap<String, String>? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,26 @@ class MainActivity : AppCompatActivity() {
         adapter = myAdapter()
         menuRecycleView.adapter = adapter
         menuRecycleView.layoutManager = LinearLayoutManager(this)
+
+        menuHashMap = HashMap()
+        menuHashMap!!["dishName"] = "senderName"
+        menuList.add(menuHashMap!!)
+
+        menuHashMap = HashMap()
+        menuHashMap!!["dishName"] = "senderName"
+        menuList.add(menuHashMap!!)
+
+        menuHashMap = HashMap()
+        menuHashMap!!["dishName"] = "senderName"
+        menuList.add(menuHashMap!!)
+
+        menuHashMap = HashMap()
+        menuHashMap!!["dishName"] = "senderName"
+        menuList.add(menuHashMap!!)
+
+        menuHashMap = HashMap()
+        menuHashMap!!["dishName"] = "senderName"
+        menuList.add(menuHashMap!!)
     }
 
 
@@ -42,8 +63,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
-            val currentItem = menuList[position]
-            holder.dishName.text = currentItem["dishName"]
+            if (position < menuList.size) {
+
+
+                val menuHashMap = menuList[position]
+                val dishName = menuHashMap["dishName"]
+                holder.dishName.text = "$dishName"
+            }
 
         }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:clickable="true"
     android:id="@+id/gigItem"
     >
@@ -21,9 +21,9 @@
             android:layout_margin="10dp">
 
             <ImageView
-                android:layout_width="140dp"
-                android:layout_height="130dp"
-                android:src=""
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+
                 />
 
 
@@ -44,7 +44,7 @@
                 android:layout_marginTop="15dp"
                 android:text="Name Of the Dish"
                 android:maxLines="1"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:text="Price"
                 android:maxLines="1"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/primary"
                 android:layout_marginTop="15dp"
@@ -67,38 +67,39 @@
                 android:gravity="right"
                 >
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/minus"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/minus"
+                    android:padding="7dp"
                     android:background="@drawable/banner_button"
-                    android:padding="10dp"
                     >
 
-                </ImageButton>
+                </ImageView>
+
 
                 <TextView
                     android:id="@+id/num"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:text="100"
+                    android:text="0"
                     android:textSize="14sp"
                     android:gravity="center"
                     >
 
                 </TextView>
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/plus"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/plus"
+                    android:padding="7dp"
                     android:background="@drawable/banner_button"
-                    android:padding="10dp"
                     >
 
-                </ImageButton>
+                </ImageView>
 
             </LinearLayout>
 
