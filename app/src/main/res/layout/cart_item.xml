@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:id="@+id/gigItem"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/menu_item_background"
+        android:layout_margin="12dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/dishName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Name Of the Dish"
+                android:maxLines="1"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Price"
+                android:maxLines="1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:layout_marginTop="15dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total: "
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        >
+
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 0.00"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        >
+
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="right"
+                    >
+
+                    <ImageView
+                        android:id="@+id/minus"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/minus"
+                        android:padding="7dp"
+                        android:background="@drawable/banner_button"
+                        >
+
+                    </ImageView>
+
+
+                    <TextView
+                        android:id="@+id/num"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        >
+
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/plus"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/plus"
+                        android:padding="7dp"
+                        android:background="@drawable/banner_button"
+                        >
+
+                    </ImageView>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
