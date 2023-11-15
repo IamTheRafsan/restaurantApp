@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Ladidh"
         tools:targetApi="31">
         <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".profile"
+            android:exported="false" />
+        <activity
             android:name=".checkOut"
             android:exported="false" />
         <activity
