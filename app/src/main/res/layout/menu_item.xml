@@ -21,8 +21,10 @@
             android:layout_margin="10dp">
 
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="100dp"
+                android:id="@id/ItemImage"
+                android:layout_width="100dp"
+                android:layout_height="130dp"
+                android:src="@drawable/logo"
 
                 />
 
@@ -38,7 +40,7 @@
             android:layout_marginRight="10dp">
 
             <TextView
-                android:id="@+id/dishName"
+                android:id="@+id/ItemName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -48,7 +50,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/price"
+                android:id="@+id/ItemPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Price"
@@ -80,7 +82,7 @@
 
 
                 <TextView
-                    android:id="@+id/num"
+                    android:id="@+id/ItemAmount"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:text="0"
