@@ -7,14 +7,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:windowSoftInputMode="adjustPan"
     tools:context=".MainActivity">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +36,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp">
+                        android:layout_marginTop="15dp">
 
                         <ImageView
                             android:id="@+id/imageView3"
@@ -94,22 +95,40 @@
                             app:layout_goneMarginEnd="8dp" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <EditText
-                        android:id="@+id/searchBtn"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginLeft="18dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="18dp"
-                        android:background="@drawable/search_box"
-                        android:drawableStart="@drawable/search_logo"
-                        android:drawablePadding="10dp"
-                        android:maxLines="1"
-                        android:hint="Search Your Food"
-                        android:drawableEnd="@drawable/search_logo"
-                        android:paddingStart="20dp">
+                        android:orientation="horizontal">
 
-                    </EditText>
+                        <EditText
+                            android:id="@+id/searchText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".8"
+                            android:background="@drawable/search_box"
+                            android:drawableStart="@drawable/search_logo"
+                            android:drawablePadding="10dp"
+                            android:hint="Search Your Food"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:paddingStart="20dp"
+                            android:textSize="16sp">
+
+                        </EditText>
+
+                        <ImageView
+                            android:id="@+id/searchBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".2"
+                            android:src="@drawable/go"
+
+                            />
+
+                    </LinearLayout>
 
 
                     <TextView
@@ -127,120 +146,120 @@
 
                     </TextView>
 
-                    <HorizontalScrollView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="12dp"
+                        android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:src="@drawable/biriyani">
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
+                            </ImageView>
+
+                            <TextView
+                                android:id="@+id/rice"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="20dp"
-                                android:orientation="vertical">
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:text="Rice"
+                                android:textSize="12sp">
 
-                                <ImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:src="@drawable/biriyani">
-
-                                </ImageView>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:padding="5dp"
-                                    android:text="Rice">
-
-                                </TextView>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="15dp"
-                                android:layout_marginRight="20dp"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:src="@drawable/kebab">
-
-                                </ImageView>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:padding="5dp"
-                                    android:text="kebab">
-
-                                </TextView>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="15dp"
-                                android:layout_marginRight="20dp"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:src="@drawable/dessert">
-
-                                </ImageView>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:padding="5dp"
-                                    android:text="Rice">
-
-                                </TextView>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="15dp"
-                                android:layout_marginRight="10dp"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:src="@drawable/addon">
-
-                                </ImageView>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:padding="5dp"
-                                    android:text="Addons">
-
-                                </TextView>
-
-                            </LinearLayout>
+                            </TextView>
 
                         </LinearLayout>
-                    </HorizontalScrollView>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:src="@drawable/kebab">
+
+                            </ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:text="kebab"
+                                android:textSize="12sp">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:src="@drawable/dessert">
+
+                            </ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:text="Desserts"
+                                android:textSize="12sp">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:src="@drawable/addon">
+
+                            </ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:text="Addons"
+                                android:textSize="12sp">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
 
                     <TextView
@@ -259,6 +278,11 @@
                     </TextView>
 
 
+                    <ProgressBar
+                        android:id="@+id/progressbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/menuRecycleView"
                         android:layout_width="match_parent"
@@ -273,7 +297,8 @@
         </LinearLayout>
 
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -286,9 +311,9 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background"
+            android:layout_height="match_parent"
             android:foregroundGravity="bottom"
+            android:background="@color/background"
             android:layout_alignParentBottom="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

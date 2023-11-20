@@ -1,10 +1,12 @@
 package com.example.ladidh
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -17,22 +19,33 @@ import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 
 
+
 class MainActivity<JSONException : Any> : AppCompatActivity() {
-    private lateinit var searchBtn: Button
-    lateinit var menuItem: RecyclerView
+
+    private lateinit var searchBtn: ImageView
     val menuList: ArrayList<HashMap <String, String>> = ArrayList()
     private lateinit var adapter: myAdapter
     private lateinit var menuRecycleView: RecyclerView
     var menuHashMap: HashMap<String, String>? = null
     private lateinit var progressbar: ProgressBar
+    var food:String = " "
+    private lateinit var searchText : EditText
+    val cartList: ArrayList<HashMap <String, String>> = ArrayList()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        cartList.clear()
+
+        searchBtn = findViewById(R.id.searchBtn)
+        searchText = findViewById(R.id.searchText)
+        progressbar = findViewById(R.id.progressbar)
 
 
+        progressbar.visibility = View.VISIBLE
 
         menuRecycleView = findViewById(R.id.menuRecycleView)
         adapter = myAdapter()
@@ -41,6 +54,10 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
 
         loadData()
 
+        searchBtn.setOnClickListener{
+            food = searchText.text.toString()
+            loadData()
+        }
 
     }
 
@@ -51,8 +68,9 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
         inner class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             var ItemName : TextView = itemView.findViewById(R.id.ItemName)
             var ItemPrice : TextView = itemView.findViewById(R.id.ItemPrice)
-            var ItemAmount : TextView = itemView.findViewById(R.id.ItemAmount)
             var ItemImage : ImageView = itemView.findViewById(R.id.ItemImage)
+            val AddToCartBtn : TextView = itemView.findViewById(R.id.AddToCartBtn)
+            val GoToCartBtn : TextView = itemView.findViewById(R.id.GoToCartBtn)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
@@ -63,7 +81,6 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
             if (position < menuList.size) {
-
 
                 val menuHashMap = menuList[position]
                 val name = menuHashMap["name"]
@@ -76,9 +93,25 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
 
                 Picasso.get().load(image).into(holder.ItemImage)
 
+                holder.AddToCartBtn.setOnClickListener {
+                    val cartHashMap = HashMap<String, String>()
+                    cartHashMap["name"] = name ?: ""
+                    cartHashMap["price"] = price ?: ""
+                    cartHashMap["image"] = image ?: ""
+
+                    cartList.add(cartHashMap)
+                    holder.AddToCartBtn.visibility = View.INVISIBLE
+                    holder.GoToCartBtn.visibility = View.VISIBLE
+                }
+
+                holder.GoToCartBtn.setOnClickListener {
+                    val intent = Intent(holder.itemView.context, cart::class.java)
+                    intent.putExtra("cartList", cartList)
+                    holder.itemView.context.startActivity(intent)
+                }
+
 
             }
-
         }
 
         override fun getItemCount(): Int {
@@ -94,7 +127,9 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
 
     private fun loadData() {
 
-        val url = "https://www.digitalrangersbd.com/app/ladidh/menu.php?f="
+        menuList.clear()
+
+        val url = "https://www.digitalrangersbd.com/app/ladidh/menu.php?f="+food
 
 
         val jsonArrayRequest = JsonArrayRequest(com.android.volley.Request.Method.GET, url, null, Response.Listener
@@ -115,6 +150,8 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
                         menuHashMap!!["image"] = image
                         menuList.add(menuHashMap!!)
 
+                        progressbar.visibility = View.GONE
+
 
                     } catch (e: Exception) {
                         // Handle general exceptions here
@@ -125,6 +162,20 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
                 if (menuList.size > 0) {
                     adapter.notifyDataSetChanged()
 
+                }
+
+                if (menuList.isEmpty()) {
+                    adapter.notifyDataSetChanged()
+                    progressbar.visibility = View.GONE
+
+                    AlertDialog.Builder(this)
+                        .setTitle("Sorry! No results found.")
+                        .setMessage("Please search something else.")
+                        .setNegativeButton("OK") { dialog, which -> }
+                        .show()
+                } else {
+                    adapter.notifyDataSetChanged()
+                    progressbar.visibility = View.GONE
                 }
             },
             Response.ErrorListener{ error ->

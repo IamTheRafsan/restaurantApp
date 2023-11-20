@@ -90,35 +90,39 @@
                 android:gravity="right"
                 >
 
-                <TextView
-                    android:id="@+id/AddToCartBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Add To Cart"
-                    android:layout_weight="1"
+                <ImageView
+                    android:id="@+id/minus"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/minus"
+                    android:padding="7dp"
                     android:background="@drawable/banner_button"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:padding="7dp"
-                    />
+                    >
+
+                </ImageView>
+
+
                 <TextView
-                    android:id="@+id/GoToCartBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Go To Cart"
-                    android:layout_weight="1"
-                    android:background="@drawable/go_to_cart"
-                    android:textColor="@color/white"
+                    android:id="@+id/ItemAmount"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:text="0"
+                    android:textSize="14sp"
                     android:gravity="center"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
+                    >
+
+                </TextView>
+
+                <ImageView
+                    android:id="@+id/plus"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/plus"
                     android:padding="7dp"
-                    android:visibility="invisible"
-                    />
+                    android:background="@drawable/banner_button"
+                    >
 
-
+                </ImageView>
 
             </LinearLayout>
 
