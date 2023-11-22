@@ -1,5 +1,6 @@
 package com.example.ladidh
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,7 @@ class cart : AppCompatActivity() {
     private lateinit var total_price: TextView
     private lateinit var applyBtn: TextView
     private lateinit var coupon_code: EditText
+    var itemTotal = BigDecimal("0.00")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +55,6 @@ class cart : AppCompatActivity() {
                 this.cartList.addAll(receivedMenuList)
             }
         }
-
-        updateTotalPrice()
 
         applyBtn.setOnClickListener() {
 
@@ -83,7 +83,27 @@ class cart : AppCompatActivity() {
 
                             couponList.add(couponHashMap!!)
 
+                            var couponPrice = 0.00
 
+                            var discount:Double = 0.00
+
+                            if (couponList.isNotEmpty()) {
+                                discount = percent.toDouble() * itemTotal.toDouble() / 100
+
+                                if (discount.toDouble() <= max.toDouble()) {
+                                    itemTotal -= BigDecimal(discount)
+                                    total_price.text = itemTotal.toString()
+                                } else {
+                                    itemTotal -= BigDecimal(max)
+                                    total_price.text = itemTotal.toString()
+                                }
+                            } else {
+                                AlertDialog.Builder(this)
+                                    .setTitle("Sorry! Invalid Coupon")
+                                    .setMessage("Please put a valid coupon")
+                                    .setNegativeButton("OK") { dialog, which -> }
+                                    .show()
+                            }
 
                         } catch (e: Exception) {
                             e.printStackTrace()
@@ -170,7 +190,7 @@ class cart : AppCompatActivity() {
     }
 
     fun updatePrice() {
-        var itemTotal = BigDecimal("0.00")
+
 
         for (i in 0 until cartList.size) {
             val menuHashMap = cartList[i]
@@ -185,7 +205,6 @@ class cart : AppCompatActivity() {
 
     fun updateTotalPrice(){
 
-        var itemTotal = BigDecimal("0.00")
 
         for (i in 0 until cartList.size) {
             val menuHashMap = cartList[i]
@@ -195,8 +214,6 @@ class cart : AppCompatActivity() {
             itemTotal = itemTotal.add(itemSubtotal)
         }
         total_price.text = itemTotal.toString()
-
-
 
     }
 
