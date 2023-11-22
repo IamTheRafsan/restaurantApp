@@ -33,8 +33,8 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
     private lateinit var searchText : EditText
     val cartList: ArrayList<HashMap <String, String>> = ArrayList()
     private lateinit var cartpage: LinearLayout
-    private lateinit var offers: LinearLayout
-    private lateinit var profile: LinearLayout
+    private lateinit var offerpage: LinearLayout
+    private lateinit var profilepage: LinearLayout
 
 
 
@@ -49,8 +49,8 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
         searchText = findViewById(R.id.searchText)
         progressbar = findViewById(R.id.progressbar)
         cartpage = findViewById(R.id.cart)
-        offers = findViewById(R.id.offer)
-        profile = findViewById(R.id.profile)
+        offerpage = findViewById(R.id.offer)
+        profilepage = findViewById(R.id.profile)
 
 
 
@@ -73,7 +73,11 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
             intent.putExtra("cartList", cartList)
             startActivity(intent)
         }
-        profile.setOnClickListener(){
+        offerpage.setOnClickListener(){
+            val intent = Intent(this, offers::class.java)
+            startActivity(intent)
+        }
+        profilepage.setOnClickListener(){
             val intent = Intent(this, profile::class.java)
             startActivity(intent)
         }

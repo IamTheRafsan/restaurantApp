@@ -138,9 +138,22 @@ class cart : AppCompatActivity() {
 
         checkoutBtn.setOnClickListener(){
 
-            val intent = Intent(this, checkOut::class.java)
-            intent.putExtra("couponPrice", couponPrice)
-            startActivity(intent)
+            if(couponPrice != 0.0)
+            {
+                val intent = Intent(this, checkOut::class.java)
+                intent.putExtra("couponPrice", couponPrice)
+                startActivity(intent)
+            }
+            else
+            {
+                AlertDialog.Builder(this)
+                    .setTitle("Empty Cart")
+                    .setMessage("Please select an item")
+                    .setNegativeButton("OK") { dialog, which -> }
+                    .show()
+            }
+
+
 
 
         }
@@ -212,6 +225,8 @@ class cart : AppCompatActivity() {
         }
     }
 
+
+    //================price update
     fun updatePrice() {
 
         var itemTotal:Double = 0.00

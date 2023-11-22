@@ -3,7 +3,11 @@ package com.example.ladidh
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import java.text.DecimalFormat
 
 class checkOut : AppCompatActivity() {
@@ -41,9 +45,43 @@ class checkOut : AppCompatActivity() {
 
         confirmBtn.setOnClickListener(){
 
-            val CustomerName = name.toString()
-            val CustomerMobile = name.toString()
-            val CustomerLocation = name.toString()
+            val CustomerName = name.text.toString()
+            val CustomerMobile = mobile.text.toString()
+            val CustomerLocation = location.text.toString()
+            val CustomeBill = coupon_Price.text.toString()
+            val status = "confirmed"
+
+            val url = "https://www.digitalrangersbd.com/app/ladidh/order.php?n="+CustomerName+"&m="+CustomerMobile+"&l="+CustomerLocation+"&b="+CustomeBill+"&s="+status
+
+            if(CustomerName.isEmpty() || CustomerMobile.isEmpty() || CustomerLocation.isEmpty())
+            {
+                AlertDialog.Builder(this)
+                    .setTitle("Empty Fields!")
+                    .setMessage("Please put all the information.")
+                    .setNegativeButton("OK") { dialog, which -> }
+                    .show()
+
+            }
+            else
+            {
+                val stringRequest = StringRequest(com.android.volley.Request.Method.GET, url,
+                    Response.Listener<String> { response ->
+                    },
+                    Response.ErrorListener { error ->
+                    })
+
+                val requestQueue = Volley.newRequestQueue(this)
+                requestQueue.add(stringRequest)
+
+                AlertDialog.Builder(this)
+                    .setTitle("Congrats! Order Confirmed.")
+                    .setMessage("Note: You will be charged Tk.2 per km from our location as delivery charges.")
+                    .setNegativeButton("OK") { dialog, which -> }
+                    .show()
+
+            }
+
+
 
 
         }
