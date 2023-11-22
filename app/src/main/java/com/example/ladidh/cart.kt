@@ -4,21 +4,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import java.math.BigDecimal
+
+
 
 class cart : AppCompatActivity() {
 
     private lateinit var cartRecyleView: RecyclerView
     var cartList: ArrayList<HashMap<String, String>> = ArrayList()
-
+    var menuHashMap: HashMap<String, String>? = null
+    var couponList: ArrayList<HashMap<String, String>> = ArrayList()
+    var couponHashMap: HashMap<String, String>? = null
     private lateinit var item_total: TextView
+    private lateinit var total_price: TextView
     private lateinit var applyBtn: TextView
+    private lateinit var coupon_code: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +38,8 @@ class cart : AppCompatActivity() {
         item_total = findViewById(R.id.itemTotal)
         applyBtn = findViewById(R.id.apply)
         cartRecyleView = findViewById(R.id.cartRecycleView)
+        total_price = findViewById(R.id.total_price)
+        coupon_code = findViewById(R.id.coupon)
 
         val adapter = myAdapter()
         cartRecyleView.adapter = adapter
@@ -40,6 +53,53 @@ class cart : AppCompatActivity() {
                 this.cartList.addAll(receivedMenuList)
             }
         }
+
+        updateTotalPrice()
+
+        applyBtn.setOnClickListener() {
+
+            val couponCode = coupon_code.text.toString()
+            couponList.clear()
+
+            val url = "https://www.digitalrangersbd.com/app/ladidh/coupon.php?c="+couponCode
+
+            val jsonArrayRequest = JsonArrayRequest(
+                Request.Method.GET, url, null, Response.Listener
+                { response ->
+
+                    for (x in 0 until response.length()) {
+                        try {
+                            val jsonObject = response.getJSONObject(x)
+                            val code = jsonObject.getString("code")
+                            val percent = jsonObject.getString("percent")
+                            val max = jsonObject.getString("max")
+                            val state = jsonObject.getString("state")
+
+                            couponHashMap = HashMap()
+                            couponHashMap!!["code"] = code
+                            couponHashMap!!["perent"] = percent
+                            couponHashMap!!["max"] = max
+                            couponHashMap!!["state"] = state
+
+                            couponList.add(couponHashMap!!)
+
+
+
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+
+                },
+                Response.ErrorListener { error ->
+                    error.printStackTrace()
+                }
+            )
+
+            val requestQueue = Volley.newRequestQueue(this)
+            requestQueue.add(jsonArrayRequest)
+        }
+
 
 
 
@@ -87,6 +147,7 @@ class cart : AppCompatActivity() {
                     menuHashMap["itemCount"] = holder.itemCount.toString()
 
                     updatePrice()
+                    updateTotalPrice()
                 }
 
                 holder.minus.setOnClickListener {
@@ -97,6 +158,7 @@ class cart : AppCompatActivity() {
                         menuHashMap["itemCount"] = holder.itemCount.toString()
 
                         updatePrice()
+                        updateTotalPrice()
                     }
                 }
             }
@@ -119,6 +181,23 @@ class cart : AppCompatActivity() {
         }
 
         item_total.text = itemTotal.toString()
+    }
+
+    fun updateTotalPrice(){
+
+        var itemTotal = BigDecimal("0.00")
+
+        for (i in 0 until cartList.size) {
+            val menuHashMap = cartList[i]
+            val price = BigDecimal(menuHashMap["price"] ?: "0")
+            val itemCount = BigDecimal(menuHashMap["itemCount"] ?: "0")
+            val itemSubtotal = price.multiply(itemCount)
+            itemTotal = itemTotal.add(itemSubtotal)
+        }
+        total_price.text = itemTotal.toString()
+
+
+
     }
 
 }
