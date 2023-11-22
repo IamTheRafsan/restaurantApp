@@ -1,6 +1,5 @@
 package com.example.ladidh
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +7,17 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
-import java.math.BigDecimal
+import java.text.DecimalFormat
+
+
 
 
 
@@ -31,7 +32,8 @@ class cart : AppCompatActivity() {
     private lateinit var total_price: TextView
     private lateinit var applyBtn: TextView
     private lateinit var coupon_code: EditText
-    var itemTotal = BigDecimal("0.00")
+    var couponPrice: Double = 0.00
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,8 +65,7 @@ class cart : AppCompatActivity() {
 
             val url = "https://www.digitalrangersbd.com/app/ladidh/coupon.php?c="+couponCode
 
-            val jsonArrayRequest = JsonArrayRequest(
-                Request.Method.GET, url, null, Response.Listener
+            val jsonArrayRequest = JsonArrayRequest(com.android.volley.Request.Method.GET, url, null, Response.Listener
                 { response ->
 
                     for (x in 0 until response.length()) {
@@ -77,32 +78,40 @@ class cart : AppCompatActivity() {
 
                             couponHashMap = HashMap()
                             couponHashMap!!["code"] = code
-                            couponHashMap!!["perent"] = percent
+                            couponHashMap!!["percent"] = percent
                             couponHashMap!!["max"] = max
                             couponHashMap!!["state"] = state
 
                             couponList.add(couponHashMap!!)
 
-                            var couponPrice = 0.00
-
                             var discount:Double = 0.00
 
-                            if (couponList.isNotEmpty()) {
-                                discount = percent.toDouble() * itemTotal.toDouble() / 100
-
-                                if (discount.toDouble() <= max.toDouble()) {
-                                    itemTotal -= BigDecimal(discount)
-                                    total_price.text = itemTotal.toString()
-                                } else {
-                                    itemTotal -= BigDecimal(max)
-                                    total_price.text = itemTotal.toString()
-                                }
-                            } else {
+                            if ( couponList.isEmpty() )
+                            {
                                 AlertDialog.Builder(this)
                                     .setTitle("Sorry! Invalid Coupon")
                                     .setMessage("Please put a valid coupon")
                                     .setNegativeButton("OK") { dialog, which -> }
                                     .show()
+
+                            }else{
+                                discount = percent.toDouble() * couponPrice / 100
+
+                                if (discount <= max.toDouble()) {
+                                    couponPrice = couponPrice - discount
+                                    val decimalFormat = DecimalFormat("#.##") // Adjust the pattern based on your requirements
+                                    val formattedItemTotal = decimalFormat.format(couponPrice)
+                                    total_price.text = formattedItemTotal
+                                    couponList.clear()
+                                    applyBtn.visibility = View.GONE
+                                } else {
+                                    couponPrice = couponPrice - max.toDouble()
+                                    val decimalFormat = DecimalFormat("#.##") // Adjust the pattern based on your requirements
+                                    val formattedItemTotal = decimalFormat.format(couponPrice)
+                                    total_price.text = formattedItemTotal
+                                    applyBtn.visibility = View.GONE
+                                    couponList.clear()
+                                }
                             }
 
                         } catch (e: Exception) {
@@ -118,6 +127,8 @@ class cart : AppCompatActivity() {
 
             val requestQueue = Volley.newRequestQueue(this)
             requestQueue.add(jsonArrayRequest)
+
+
         }
 
 
@@ -167,7 +178,6 @@ class cart : AppCompatActivity() {
                     menuHashMap["itemCount"] = holder.itemCount.toString()
 
                     updatePrice()
-                    updateTotalPrice()
                 }
 
                 holder.minus.setOnClickListener {
@@ -178,7 +188,6 @@ class cart : AppCompatActivity() {
                         menuHashMap["itemCount"] = holder.itemCount.toString()
 
                         updatePrice()
-                        updateTotalPrice()
                     }
                 }
             }
@@ -191,29 +200,29 @@ class cart : AppCompatActivity() {
 
     fun updatePrice() {
 
+        var itemTotal:Double = 0.00
+
+
+
 
         for (i in 0 until cartList.size) {
             val menuHashMap = cartList[i]
-            val price = BigDecimal(menuHashMap["price"] ?: "0")
-            val itemCount = BigDecimal(menuHashMap["itemCount"] ?: "0")
-            val itemSubtotal = price.multiply(itemCount)
-            itemTotal = itemTotal.add(itemSubtotal)
+            val price = menuHashMap["price"] ?: "0"
+            val itemCount = menuHashMap["itemCount"] ?: "0"
+            val itemSubtotal:Double = price.toDouble()*itemCount.toDouble()
+            itemTotal = itemTotal+itemSubtotal
         }
 
-        item_total.text = itemTotal.toString()
+        val decimalFormat = DecimalFormat("#.##") // Adjust the pattern based on your requirements
+        val formattedItemTotal = decimalFormat.format(itemTotal)
+        item_total.text = formattedItemTotal
+        total_price.text = formattedItemTotal
+        couponPrice = itemTotal
     }
 
     fun updateTotalPrice(){
 
 
-        for (i in 0 until cartList.size) {
-            val menuHashMap = cartList[i]
-            val price = BigDecimal(menuHashMap["price"] ?: "0")
-            val itemCount = BigDecimal(menuHashMap["itemCount"] ?: "0")
-            val itemSubtotal = price.multiply(itemCount)
-            itemTotal = itemTotal.add(itemSubtotal)
-        }
-        total_price.text = itemTotal.toString()
 
     }
 

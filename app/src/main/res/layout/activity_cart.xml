@@ -63,6 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight=".8"
                         android:background="@drawable/input_backgroud"
@@ -85,6 +86,8 @@
                         android:gravity="center"
                         android:padding="10dp"
                         android:text="Apply"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold">
