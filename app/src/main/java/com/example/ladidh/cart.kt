@@ -9,10 +9,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import java.math.BigDecimal
 
@@ -20,9 +16,7 @@ class cart : AppCompatActivity() {
 
     private lateinit var cartRecyleView: RecyclerView
     var cartList: ArrayList<HashMap<String, String>> = ArrayList()
-    var menuHashMap: HashMap<String, String>? = null
-    var couponList: ArrayList<HashMap<String, String>> = ArrayList()
-    var couponHashMap: HashMap<String, String>? = null
+
     private lateinit var item_total: TextView
     private lateinit var applyBtn: TextView
 
@@ -32,48 +26,23 @@ class cart : AppCompatActivity() {
 
         item_total = findViewById(R.id.itemTotal)
         applyBtn = findViewById(R.id.apply)
-
         cartRecyleView = findViewById(R.id.cartRecycleView)
+
         val adapter = myAdapter()
         cartRecyleView.adapter = adapter
         cartRecyleView.layoutManager = LinearLayoutManager(this)
 
-        applyBtn.setOnClickListener() {
-            couponList.clear()
+        val receivedIntent = intent
+        if (receivedIntent != null) {
+            val receivedMenuList = receivedIntent.getSerializableExtra("cartList") as? ArrayList<HashMap<String, String>>
 
-            val url = "https://www.digitalrangersbd.com/app/ladidh/menu.php?=c"
-
-            val jsonArrayRequest = JsonArrayRequest(
-                Request.Method.GET, url, null, Response.Listener
-                { response ->
-                    for (x in 0 until response.length()) {
-                        try {
-                            val jsonObject = response.getJSONObject(x)
-                            val code = jsonObject.getString("code")
-                            val max = jsonObject.getString("max")
-                            val state = jsonObject.getString("state")
-
-                            couponHashMap = HashMap()
-                            couponHashMap!!["code"] = code
-                            couponHashMap!!["max"] = max
-                            couponHashMap!!["state"] = state
-
-                            couponList.add(couponHashMap!!)
-
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-                    }
-
-                },
-                Response.ErrorListener { error ->
-                    error.printStackTrace()
-                }
-            )
-
-            val requestQueue = Volley.newRequestQueue(this)
-            requestQueue.add(jsonArrayRequest)
+            if (receivedMenuList != null) {
+                this.cartList.addAll(receivedMenuList)
+            }
         }
+
+
+
     }
 
     //==========================recycle View adapter
