@@ -10,7 +10,7 @@
     android:windowSoftInputMode="adjustPan"
     tools:context=".MainActivity">
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -297,7 +297,7 @@
         </LinearLayout>
 
 
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -326,11 +326,14 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/home"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    >
 
                     <ImageView
                         android:layout_width="20dp"
@@ -353,11 +356,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/cart"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    >
 
                     <ImageView
                         android:layout_width="20dp"
@@ -380,16 +386,18 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/offer"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:gravity="center"
+                    android:clickable="true"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/notification">
+                        android:layout_width="21dp"
+                        android:layout_height="21dp"
+                        android:src="@drawable/offers">
 
                     </ImageView>
 
@@ -397,7 +405,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="Notifications"
+                        android:text="Offers"
                         android:textSize="12sp"
 
                         >
@@ -407,11 +415,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/profile"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    >
 
                     <ImageView
                         android:layout_width="20dp"

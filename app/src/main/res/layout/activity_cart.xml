@@ -9,14 +9,17 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        >
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="8dp">
 
             <TextView
                 android:id="@+id/textView6"
@@ -83,11 +86,11 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight=".2"
                         android:background="@drawable/go_to_cart"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         android:gravity="center"
                         android:padding="10dp"
                         android:text="Apply"
-                        android:clickable="true"
-                        android:foreground="?attr/selectableItemBackground"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold">
@@ -186,14 +189,34 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:gravity="right"
+                        android:text="+ Delivery Charges"
+                        android:textColor="@color/primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <TextView
+                android:id="@+id/checkout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="5dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/banner_button"
                 android:gravity="center"
                 android:padding="10dp"
@@ -201,7 +224,6 @@
                 android:textColor="@color/white"
                 android:textSize="28dp"
                 android:textStyle="bold"
-                android:layout_marginBottom="20dp"
 
 
                 >
@@ -211,6 +233,7 @@
 
         </LinearLayout>
 
-
     </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

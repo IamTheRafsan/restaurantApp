@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +32,10 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
     var food:String = " "
     private lateinit var searchText : EditText
     val cartList: ArrayList<HashMap <String, String>> = ArrayList()
+    private lateinit var cartpage: LinearLayout
+    private lateinit var offers: LinearLayout
+    private lateinit var profile: LinearLayout
+
 
 
 
@@ -43,6 +48,10 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
         searchBtn = findViewById(R.id.searchBtn)
         searchText = findViewById(R.id.searchText)
         progressbar = findViewById(R.id.progressbar)
+        cartpage = findViewById(R.id.cart)
+        offers = findViewById(R.id.offer)
+        profile = findViewById(R.id.profile)
+
 
 
         progressbar.visibility = View.VISIBLE
@@ -57,6 +66,16 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
         searchBtn.setOnClickListener{
             food = searchText.text.toString()
             loadData()
+        }
+
+        cartpage.setOnClickListener(){
+            val intent = Intent(this, cart::class.java)
+            intent.putExtra("cartList", cartList)
+            startActivity(intent)
+        }
+        profile.setOnClickListener(){
+            val intent = Intent(this, profile::class.java)
+            startActivity(intent)
         }
 
     }
@@ -93,6 +112,16 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
 
                 Picasso.get().load(image).into(holder.ItemImage)
 
+                val isInCart = cartList.any { it["name"] == name }
+
+                if (isInCart) {
+                    holder.AddToCartBtn.visibility = View.GONE
+                    holder.GoToCartBtn.visibility = View.VISIBLE
+                } else {
+                    holder.AddToCartBtn.visibility = View.VISIBLE
+                    holder.GoToCartBtn.visibility = View.GONE
+                }
+
                 holder.AddToCartBtn.setOnClickListener {
                     val cartHashMap = HashMap<String, String>()
                     cartHashMap["name"] = name ?: ""
@@ -100,7 +129,7 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
                     cartHashMap["image"] = image ?: ""
 
                     cartList.add(cartHashMap)
-                    holder.AddToCartBtn.visibility = View.INVISIBLE
+                    holder.AddToCartBtn.visibility = View.GONE
                     holder.GoToCartBtn.visibility = View.VISIBLE
                 }
 

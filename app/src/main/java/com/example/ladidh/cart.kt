@@ -1,5 +1,6 @@
 package com.example.ladidh
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,8 +32,10 @@ class cart : AppCompatActivity() {
     private lateinit var item_total: TextView
     private lateinit var total_price: TextView
     private lateinit var applyBtn: TextView
+    private lateinit var checkoutBtn: TextView
     private lateinit var coupon_code: EditText
     var couponPrice: Double = 0.00
+    var itemTotal: Double = 0.00
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +44,7 @@ class cart : AppCompatActivity() {
 
         item_total = findViewById(R.id.itemTotal)
         applyBtn = findViewById(R.id.apply)
+        checkoutBtn = findViewById(R.id.checkout)
         cartRecyleView = findViewById(R.id.cartRecycleView)
         total_price = findViewById(R.id.total_price)
         coupon_code = findViewById(R.id.coupon)
@@ -132,6 +136,16 @@ class cart : AppCompatActivity() {
         }
 
 
+        checkoutBtn.setOnClickListener(){
+
+            val intent = Intent(this, checkOut::class.java)
+            intent.putExtra("couponPrice", couponPrice)
+            startActivity(intent)
+
+
+        }
+
+
 
 
     }
@@ -203,8 +217,6 @@ class cart : AppCompatActivity() {
         var itemTotal:Double = 0.00
 
 
-
-
         for (i in 0 until cartList.size) {
             val menuHashMap = cartList[i]
             val price = menuHashMap["price"] ?: "0"
@@ -220,10 +232,5 @@ class cart : AppCompatActivity() {
         couponPrice = itemTotal
     }
 
-    fun updateTotalPrice(){
-
-
-
-    }
 
 }
