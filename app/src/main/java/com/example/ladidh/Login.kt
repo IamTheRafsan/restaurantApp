@@ -165,7 +165,7 @@ class Login : AppCompatActivity() {
 
                 progressbar.setVisibility(View.VISIBLE)
 
-                val url3 = "https://www.digitalrangersbd.com/app/ladidh/userLogin.php?m=$sMobile&p=$sPassword"
+                val url3 = "https://www.digitalrangersbd.com/app/ladidh/userLogin.php?m="+sMobile+"&p="+sPassword
 
                 val jsonArrayRequest = JsonArrayRequest(
                     Request.Method.GET, url3, null,
@@ -180,7 +180,7 @@ class Login : AppCompatActivity() {
                                 .setNegativeButton("OK") { dialog, which -> }
                                 .show()
                         } else {
-                            val url4 = "https://www.digitalrangersbd.com/app/ladidh/userDetail.php?m=$sMobile&p=$sPassword"
+                            val url4 = "https://www.digitalrangersbd.com/app/ladidh/userDetail.php?m="+sMobile+"&p="+sPassword
                             val detailArrayRequest = JsonArrayRequest(
                                 Request.Method.GET, url4, null,
                                 { response ->
@@ -197,6 +197,9 @@ class Login : AppCompatActivity() {
                                             editor.putString("userLocation", location)
                                             editor.putString("userName", name)
                                             editor.apply()
+
+                                            val myintent = Intent(this, profile::class.java)
+                                            startActivity(myintent)
 
                                             progressbar.visibility = View.GONE
 
@@ -218,8 +221,7 @@ class Login : AppCompatActivity() {
                             val requestQueue = Volley.newRequestQueue(applicationContext)
                             requestQueue.add(detailArrayRequest)
 
-                            val myintent = Intent(this, profile::class.java)
-                            startActivity(myintent)
+
                         }
                     },
                     { error ->
