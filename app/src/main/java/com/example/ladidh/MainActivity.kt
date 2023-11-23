@@ -78,7 +78,7 @@ class MainActivity<JSONException : Any> : AppCompatActivity() {
             startActivity(intent)
         }
         profilepage.setOnClickListener(){
-            val intent = Intent(this, profile::class.java)
+            val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
 

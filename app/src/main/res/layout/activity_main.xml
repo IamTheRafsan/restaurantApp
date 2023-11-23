@@ -125,6 +125,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight=".2"
                             android:src="@drawable/go"
+                            android:foreground="?attr/selectableItemBackground"
 
                             />
 

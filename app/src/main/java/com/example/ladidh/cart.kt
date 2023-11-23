@@ -136,27 +136,38 @@ class cart : AppCompatActivity() {
         }
 
 
-        checkoutBtn.setOnClickListener(){
+        checkoutBtn.setOnClickListener() {
 
-            if(couponPrice != 0.0)
-            {
+            if (couponPrice != 0.0) {
                 val intent = Intent(this, checkOut::class.java)
+
+                val selectedItemsList = ArrayList<HashMap<String, String>>()
+
+                for (i in 0 until cartList.size) {
+                    val menuHashMap = cartList[i]
+                    val itemName = menuHashMap["name"] ?: ""
+                    val itemCount = menuHashMap["itemCount"] ?: "0"
+
+                    val selectedItem = HashMap<String, String>()
+                    selectedItem["itemName"] = itemName
+                    selectedItem["itemCount"] = itemCount
+
+                    selectedItemsList.add(selectedItem)
+                }
+
+                intent.putExtra("selectedItems", selectedItemsList)
                 intent.putExtra("couponPrice", couponPrice)
+
                 startActivity(intent)
-            }
-            else
-            {
+            } else {
                 AlertDialog.Builder(this)
                     .setTitle("Empty Cart")
                     .setMessage("Please select an item")
                     .setNegativeButton("OK") { dialog, which -> }
                     .show()
             }
-
-
-
-
         }
+
 
 
 

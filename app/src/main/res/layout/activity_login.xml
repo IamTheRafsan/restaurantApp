@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".Login">
 
     <ScrollView
@@ -26,13 +27,12 @@
                 android:layout_marginTop="150dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/banner_button"
+                android:background="@color/primary"
                 >
                 <TextView
-                    android:id="@+id/signInButton"
+                    android:id="@+id/loginBtn"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/banner_button"
                     android:text="Login"
                     android:gravity="center"
                     android:textSize="18dp"
@@ -43,14 +43,13 @@
                     ></TextView>
 
                 <TextView
-                    android:id="@+id/signUpButton"
+                    android:id="@+id/regBtn"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/banner_button"
                     android:text="Register"
                     android:gravity="center"
                     android:textSize="18dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_weight="1"
                     android:textStyle="bold"
                     android:clickable="true"
@@ -59,19 +58,23 @@
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 >
 
                 <LinearLayout
-                    android:id="@+id/linearLayout"
+                    android:id="@+id/loginBox"
                     android:layout_width="277dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginTop="35dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:visibility="visible"
+                    >
 
                     <ProgressBar
                         android:id="@+id/progressbar"
@@ -85,7 +88,7 @@
                     </ProgressBar>
 
                     <EditText
-                        android:id="@+id/signInEmail"
+                        android:id="@+id/loginMobile"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="10dp"
@@ -93,7 +96,7 @@
                         android:background="@drawable/login_input"
                         android:ems="10"
                         android:gravity="center"
-                        android:hint="E-mail"
+                        android:hint="Mobile: 01795584109"
                         android:inputType="text"
                         android:textColor="@color/black"
                         android:textColorHint="@color/black"
@@ -101,7 +104,7 @@
                         />
 
                     <EditText
-                        android:id="@+id/signInPassword"
+                        android:id="@+id/loginPassword"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="10dp"
@@ -128,6 +131,7 @@
                         android:textSize="16dp" />
 
                     <TextView
+                        android:id="@+id/goToReg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -148,18 +152,20 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"
                 >
 
                 <LinearLayout
-                    android:id="@+id/linearLayout2"
+                    android:id="@+id/regBox"
                     android:layout_width="277dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
+                    android:layout_marginBottom="20dp"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:visibility="gone"
+                    >
 
                     <ProgressBar
                         android:id="@+id/progressbar2"
@@ -173,7 +179,7 @@
                     </ProgressBar>
 
                     <EditText
-                        android:id="@+id/signUpName"
+                        android:id="@+id/regName"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="10dp"
@@ -189,7 +195,7 @@
                         />
 
                     <EditText
-                        android:id="@+id/signUpEmail"
+                        android:id="@+id/regMobile"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="10dp"
@@ -197,7 +203,7 @@
                         android:background="@drawable/login_input"
                         android:ems="10"
                         android:gravity="center"
-                        android:hint="E-mail"
+                        android:hint="Mobile: 01795584109"
                         android:inputType="text"
                         android:textColor="@color/black"
                         android:textColorHint="@color/black"
@@ -205,7 +211,23 @@
                         />
 
                     <EditText
-                        android:id="@+id/signUpPassword"
+                        android:id="@+id/regLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/login_input"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:hint="Location"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="16sp"
+                        />
+
+                    <EditText
+                        android:id="@+id/regPassword"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="10dp"
@@ -221,7 +243,7 @@
                         />
 
                     <EditText
-                        android:id="@+id/signUpConfirmPassword"
+                        android:id="@+id/regConfirmPassword"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="10dp"
@@ -248,9 +270,11 @@
                         android:textSize="16dp" />
 
                     <TextView
+                        android:id="@+id/goToLogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
+                        android:layout_marginBottom="25dp"
                         android:gravity="center"
                         android:text="Already Registered? Sign in"
                         android:textColor="@color/black"

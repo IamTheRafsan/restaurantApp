@@ -17,7 +17,7 @@ class checkOut : AppCompatActivity() {
     private lateinit var mobile: EditText
     private lateinit var location: EditText
     private lateinit var confirmBtn: TextView
-
+    private lateinit var selectedItemsList: ArrayList<HashMap<String, String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +31,9 @@ class checkOut : AppCompatActivity() {
 
 
 
-
-
         val receivedIntent = intent
         if (receivedIntent != null) {
+            selectedItemsList = receivedIntent.getSerializableExtra("selectedItems") as? ArrayList<HashMap<String, String>> ?: ArrayList()
             val couponPrice = receivedIntent.getDoubleExtra("couponPrice", 0.0)
 
             val decimalFormat = DecimalFormat("#.##")
@@ -49,9 +48,10 @@ class checkOut : AppCompatActivity() {
             val CustomerMobile = mobile.text.toString()
             val CustomerLocation = location.text.toString()
             val CustomeBill = coupon_Price.text.toString()
+            val Items = formatSelectedItems(selectedItemsList)
             val status = "confirmed"
 
-            val url = "https://www.digitalrangersbd.com/app/ladidh/order.php?n="+CustomerName+"&m="+CustomerMobile+"&l="+CustomerLocation+"&b="+CustomeBill+"&s="+status
+            val url = "https://www.digitalrangersbd.com/app/ladidh/order.php?n="+CustomerName+"&m="+CustomerMobile+"&l="+CustomerLocation+"&i="+Items+"&b="+CustomeBill+"&s="+status
 
             if(CustomerName.isEmpty() || CustomerMobile.isEmpty() || CustomerLocation.isEmpty())
             {
@@ -85,5 +85,17 @@ class checkOut : AppCompatActivity() {
 
 
         }
+    }
+    private fun formatSelectedItems(selectedItemsList: ArrayList<HashMap<String, String>>): String {
+        val itemsStringBuilder = StringBuilder()
+
+        for (item in selectedItemsList) {
+            val itemName = item["itemName"] ?: ""
+            val itemCount = item["itemCount"] ?: "0"
+
+            itemsStringBuilder.append("$itemName: $itemCount, ")
+        }
+
+        return itemsStringBuilder.toString().trimEnd(',', ' ')
     }
 }
