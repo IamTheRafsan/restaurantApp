@@ -175,7 +175,7 @@ class Login : AppCompatActivity() {
                         if (result.length < 3) {
                             progressbar.setVisibility(View.GONE)
                             AlertDialog.Builder(this)
-                                .setTitle("Wrong Email or Password!")
+                                .setTitle("Wrong Mobile or Password!")
                                 .setMessage("Please put all information correctly.")
                                 .setNegativeButton("OK") { dialog, which -> }
                                 .show()
